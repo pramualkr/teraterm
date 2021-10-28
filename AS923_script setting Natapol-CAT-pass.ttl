@@ -1,0 +1,388 @@
+;AS923  Serial transmit script file
+
+;============================================
+
+
+
+;************************* NATAPOL J. ES *****************
+inputbox 'COM PORT Number :' 'Serial COM => '
+constr = '/C='
+strconcat constr inputstr
+strconcat constr ' /BAUD=57600'
+
+connect constr
+;*********************************************************
+
+setecho 1
+show 1
+ 
+sendln 'sys reset'
+Pause 2   ; Pause 2 second 
+
+
+
+
+;==============================  OTAA ====================================
+
+
+;*********************** SET DEVEUI  "BOX Message " ********************
+
+
+;inputbox 'Set deveui:' 'Deveui:' ; Show Message BOX
+;constr = 'mac set deveui ' ; Set deveui
+;strconcat constr inputstr
+;sendln constr ; send all command 
+
+;timeout = 2
+;wait 'ok' 'invalid_param'
+;if result=0 goto timeout
+;if result=2 goto error
+
+;Pause 2   ; Pause 2 second 
+
+
+
+;============================= OTAA ==============================
+
+
+;************************* deveui ********************************
+
+
+sendln 'mac set deveui 0004A30B0021D334' ;<-------  Change here
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+
+
+;************************* appeui ********************************
+
+sendln 'mac set appeui 10203040A0B0C0D0'  ;<-------  Change here
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+;************************* appkey ********************************
+sendln 'mac set appkey 1000200030004000500060007000800A'   ;<-------  Change here
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+If result=2 goto error
+
+
+
+;==========================  ABP =============================================
+
+; ========================  devaddr  ========================================
+
+
+sendln 'mac set devaddr 0021D334'   ;<-------  Change here
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+If result=2 goto error
+
+; ========================  nwkskey  ========================================
+sendln 'mac set nwkskey 28AED22B7E1516A609CFABF715884F3C'   ;<-------  Change here
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+If result=2 goto error
+
+
+; ========================  appskey  ========================================
+sendln 'mac set appskey 1628AE2B7E15D2A6ABF7CF4F3C158809'   ;<-------  Change here
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+If result=2 goto error
+ 
+
+
+Sendln 'mac save'
+;Pause 5 ; pause 2 second
+
+timeout = 5
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result!=1 goto error
+
+
+
+
+;********************  Freq and CH ************************
+
+Sendln 'mac set ch freq 2 923000000'     
+;Pause 2 ; Pause 2 second
+
+timeout = 3
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+:freg_3
+
+Sendln 'mac set ch freq 3 922800000'   
+;Pause 2 ; Pause 2 second
+
+timeout = 3
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch freq 4 921600000'     
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch freq 5 921800000'   
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch freq 6 922000000'   
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch freq 7 922200000'     
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch dcycle 2 999'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch dcycle 3 999'       
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch dcycle 4 999'   
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch dcycle 5 999'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch dcycle 6 999'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch dcycle 7 999'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch drrange 2 0 5'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch drrange 3 0 5'   
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch drrange 4 0 5'     
+;Pause 2 ; Pause 2 second
+
+timeout = 3
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch drrange 5 0 5'   
+;Pause 2 ; Pause 2 second
+
+timeout = 3
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch drrange 6 0 5'      
+;Pause 2 ; Pause 2 second
+
+timeout = 3
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch drrange 7 0 5'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch status 2 on'   
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac set ch status 3 on'     
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch status 4 on'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch status 5 on'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+Sendln 'mac set ch status 6 on'     
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+Sendln 'mac set ch status 7 on'    
+;Pause 2 ; Pause 2 second
+
+timeout = 2
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result=2 goto error
+
+
+
+Sendln 'mac save'
+;Pause 5 ; pause 5 second
+
+timeout = 5
+wait 'ok' 'invalid_param'
+if result=0 goto timeout
+if result!=1 goto error
+
+
+
+Sendln 'mac get deveui'
+Pause 3 ; pause 5 second
+
+ 
+title="Finished"
+message="RN2903\n"
+strspecial message
+messagebox message title
+
+goto RN2903_EXIT
+
+
+:error
+
+title="Error"
+message="Not Finished\n"
+strspecial message
+messagebox message title
+
+:RN2903_EXIT
+
+;closett ; close teraterm
+
+
